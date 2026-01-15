@@ -208,3 +208,27 @@ _env.bat
 
 # ROS2 DDS security files
 *.keystore/
+
+# IDE files
+**/.idea
+**/CMakeLists.txt.user
+
+# build folders
+cmake-build-debug/*
+cmake-build-**
+**/build
+bin/*
+lib/*
+**/lib
+build*
+
+# results
+results/*
+evaluation/results/
+evaluation/matlab-evaluation/**/*.mat
+/results.txt*
+/pointcloud.ply
+**.ply
+
+# python
+**.pyc
