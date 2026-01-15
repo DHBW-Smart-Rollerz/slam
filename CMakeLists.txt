@@ -7,10 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
-
+  # the following line skips the linter which checks for copyrights
+  # comment the line when a copyright and license is added to all source files
+  set(ament_cmake_copyright_FOUND TRUE)
   # the following line skips the linter which checks for copyrights
   # comment the line when a copyright and license is added to all source files
   set(ament_cmake_copyright_FOUND TRUE)
@@ -22,4 +26,14 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+## Add executables and dependencies
+
+## listener (subscriber)
+add_executable(listener src/subscriber_lambda_function.cpp)
+ament_target_dependencies(listener rclcpp sensor_msgs)
+
 ament_package()
+
+install(TARGETS
+  listener
+  DESTINATION lib/${PROJECT_NAME})
