@@ -221,6 +221,8 @@ bin/*
 lib/*
 **/lib
 build*
+ldso_slam/bin/
+ldso_slam/**/bin/
 
 # results
 results/*
