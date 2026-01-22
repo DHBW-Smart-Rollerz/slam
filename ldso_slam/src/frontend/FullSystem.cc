@@ -87,6 +87,7 @@ namespace ldso {
             // use initializer
             if (coarseInitializer->frameID < 0) {   // first frame not set, set it
                 coarseInitializer->setFirst(Hcalib->mpCH, fh);
+                LOG(INFO) << "Not initialized yet ... " << endl;
             } else if (coarseInitializer->trackFrame(fh)) {
                 // init succeeded
                 initializeFromInitializer(fh);
@@ -97,6 +98,7 @@ namespace ldso {
                 // still initializing
                 frame->poseValid = false;
                 frame->ReleaseAll();        // don't need this frame, release all the internal
+                LOG(INFO) << "Still initializing ... " << endl;
             }
             return;
         } else {
