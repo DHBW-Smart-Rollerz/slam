@@ -100,11 +100,10 @@ public:
           frame->exposure_time = 1.0f; // oder aus msg, falls vorhanden
 
           fullSystem->addActiveFrame(frame, counter);
+          RCLCPP_INFO(this->get_logger(), "Image %d received and forwarded to LDSO", counter);
           counter++;
 
           delete frame;
-
-          RCLCPP_INFO(this->get_logger(), "Image " + std::to_string(counter) + " received and forwarded to LDSO");
         } catch (const cv_bridge::Exception & e) {
           RCLCPP_ERROR(this->get_logger(), "cv_bridge exception: %s", e.what());
         } catch (const std::exception & e) {
