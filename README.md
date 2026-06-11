@@ -131,13 +131,19 @@ Diese Pipeline spielt einen Rosbag ab.
 
 ### Wiedergabe eines EuRoC-Datensatzes
 
-Falls Daten im ASL-Format vorliegen, kann der Python-Treiber direkt verwendet werden:
+1. Terminal
 
 ```bash
-ros2 run ros2_orb_slam3 mono_driver_node.py --ros-args \
-    -p settings_name:=EuRoC \
-    -p image_seq:=MH_05_difficult
-
+source ./install/setup.bash
+ros2 run ros2_orb_slam3 mono_py_driver.py --ros-args \
+    -p settings_name:="smartrollerz" \
+    -p image_seq:="MH01" \
+    -p dataset_parent_path:="/pfad/zu/den/datasets"
+```
+2. Terminal
+```bash
+source ./install/setup.bash
+ros2 run ros2_orb_slam3 mono_node_cpp --ros-args -p node_name_arg:=mono_slam_cpp
 ```
 
 ## Testdatensätze und Rosbags
@@ -206,54 +212,6 @@ ORBextractor.minThFAST: 3
 
 ---
 
-## Verwendung & Launch-Befehle
-
-### 1. Wiedergabe aus einem ROS 2 Bag (MCAP / db3)
-
-Dieses Launch-File startet die Rosbag-Wiedergabe, die Rektifizierung, das ROI-Masking sowie den asynchronen ORB-SLAM3-Kern simultan:
-
-```bash
-ros2 launch ros2_orb_slam3 rosbag_pipeline.launch.py \
-    bag_path:="Pfad/zu/deinem/rosbag" \
-    input_topic:="/camera/image/raw" \
-    use_roi_mask:="true" \
-    roi_mask_top_percent:="0.45" \
-    enable_imu:="true"
-
-```
-
-### 2. Live-Kamera-Pipeline
-
-Für den direkten Betrieb an einer aktiven Hardware-Kamera:
-
-```bash
-ros2 launch ros2_orb_slam3 live_pipeline.launch.py \
-    input_topic:="/my_camera/raw_image" \
-    use_roi_mask:="true" \
-    roi_mask_top_percent:="0.50"
-
-```
-
-### 3. Wiedergabe eines EuRoC-Datensatzes
-
-Falls Daten im ASL-Format vorliegen, kann der Python-Treiber direkt verwendet werden:
-
-1. Terminal
-
-```bash
-source ./install/setup.bash
-ros2 run ros2_orb_slam3 mono_py_driver.py --ros-args \
-    -p settings_name:="smartrollerz" \
-    -p image_seq:="MH01" \
-    -p dataset_parent_path:="/pfad/zu/den/datasets"
-```
-2. Terminal
-```bash
-source ./install/setup.bash
-ros2 run ros2_orb_slam3 mono_node_cpp --ros-args -p node_name_arg:=mono_slam_cpp
-```
-
----
 
 ## Diagnose & Pipeline-Überwachung
 
