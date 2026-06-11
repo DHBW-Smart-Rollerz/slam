@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+TEST_ROSBAGS/*
+TEST_DATASETS/*
+
 # C extensions
 *.so
 

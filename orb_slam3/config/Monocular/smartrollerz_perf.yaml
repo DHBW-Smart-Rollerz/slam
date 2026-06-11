@@ -1,0 +1,50 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# smartrollerz_perf.yaml - Performance-optimierte Konfiguration
+# Ziel: stabile Echtzeit-Performance bei guter Robustheit
+#--------------------------------------------------------------------------------------------
+
+File.version: "1.0"
+Camera.type: "PinHole"
+
+# Kalibrierung (aus smartrollerz übernommen)
+Camera1.fx: 774.48
+Camera1.fy: 434.32
+Camera1.cx: 1032.0
+Camera1.cy: 772.0
+
+Camera1.k1: -0.28340811
+Camera1.k2: 0.07395907
+Camera1.p1: 0.00019359
+Camera1.p2: 1.76187114e-05
+
+# Native Eingangsbildgröße
+Camera.width: 2064
+Camera.height: 1544
+
+# Downscale für stabile SLAM-Performance
+Camera.newWidth: 1024
+Camera.newHeight: 768
+
+Camera.fps: 20
+Camera.RGB: 1
+
+# ORB-Extractor: auf Echtzeit statt Maximaldichte getrimmt
+ORBextractor.nFeatures: 2500
+ORBextractor.scaleFactor: 1.2
+ORBextractor.nLevels: 8
+ORBextractor.iniThFAST: 10
+ORBextractor.minThFAST: 5
+
+# Viewer
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.0
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2.0
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.0
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500.0
