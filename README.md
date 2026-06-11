@@ -1,6 +1,6 @@
 # ros2_orb_slam3
 
-Dieses ROS 2-Package integriert **ORB-SLAM3** (Monokular / Monokular-Inertial) in eine modulare Pipeline zur Bildvorverarbeitung und Echtzeit-Lokalisierung. Es ist speziell für den Einsatz in **Straßenszenarien** auf fahrzeugmontierten Plattformen optimiert, verfügt über ein dynamisches Region-of-Interest (ROI) Masking zur Ausblendung von Störobjekten (z. B. der eigenen Motorhaube) und bietet umfassende Analyse- und Debug-Werkzeuge.
+Dieses ROS 2-Package integriert **ORB-SLAM3** (Monokular / Monokular-Inertial) in eine modulare Pipeline zur Bildvorverarbeitung und Echtzeit-Lokalisierung. Es ist speziell für den Einsatz in **Straßenszenarien** auf fahrzeugmontierten Plattformen optimiert, verfügt über ein dynamisches Region-of-Interest (ROI) Masking zur Ausblendung von Störobjekten und bietet umfassende Analyse- und Debug-Werkzeuge.
 
 ---
 
@@ -135,10 +135,7 @@ Diese Pipeline spielt einen Rosbag ab.
 
 ```bash
 source ./install/setup.bash
-ros2 run ros2_orb_slam3 mono_py_driver.py --ros-args \
-    -p settings_name:="smartrollerz" \
-    -p image_seq:="MH01" \
-    -p dataset_parent_path:="/pfad/zu/den/datasets"
+ros2 run ros2_orb_slam3 mono_driver_node.py --ros-args     -p settings_name:=EuRoC     -p image_seq:=MH_05_difficult
 ```
 2. Terminal
 ```bash
@@ -201,14 +198,7 @@ Wenn ROI-Masking deaktiviert ist, wird das vorverarbeitete Bild direkt an `mono_
 
 ## Konfiguration
 
-Die Parameter für Fahrzeugszenarien werden über die Datei `smartrollerz.yaml` gesteuert. Wichtige Anpassungen für Texturen auf Straßenoberflächen:
-
-```yaml
-# Erhöhte Sensitivität für feine Grauwertunterschiede auf Asphalt/Beton
-ORBextractor.iniThFAST: 8
-ORBextractor.minThFAST: 3
-
-```
+Die Parameter für Fahrzeugszenarien werden über die Datei `smartrollerz.yaml` gesteuert.
 
 ---
 
@@ -231,7 +221,5 @@ ros2 run ros2_orb_slam3 image_debug_viewer.py
 Analysiert rein textbasiert die Frequenz (FPS) und den Status aller relevanten Topics, um Remapping-Fehler oder blockierte Pipelines sofort zu identifizieren:
 
 ```bash
-ros2 run ros2_orb_slam3 simple_image_monitor.py --ros-args \
-    -p orb_input_topic:="/camera/image/roi_masked"
-
+ros2 run ros2_orb_slam3 image_monitor_simple.py
 ```
